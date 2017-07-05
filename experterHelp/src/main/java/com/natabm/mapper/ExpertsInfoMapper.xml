@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.ExpertsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.ExpertsInfo" >
+    <id column="serial_id" property="serialId" jdbcType="VARCHAR" />
+    <result column="first_type" property="firstType" jdbcType="VARCHAR" />
+    <result column="second_type" property="secondType" jdbcType="VARCHAR" />
+    <result column="third_type" property="thirdType" jdbcType="VARCHAR" />
+    <result column="expert_name" property="expertName" jdbcType="VARCHAR" />
+    <result column="expert_natural" property="expertNatural" jdbcType="VARCHAR" />
+    <result column="expert_fee" property="expertFee" jdbcType="VARCHAR" />
+    <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serial_id, first_type, second_type, third_type, expert_name, expert_natural, expert_fee, 
+    phone_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from experts_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from experts_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.natabm.entity.ExpertsInfo" >
+    insert into experts_info (serial_id, first_type, second_type, 
+      third_type, expert_name, expert_natural, 
+      expert_fee, phone_no)
+    values (#{serialId,jdbcType=VARCHAR}, #{firstType,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, 
+      #{thirdType,jdbcType=VARCHAR}, #{expertName,jdbcType=VARCHAR}, #{expertNatural,jdbcType=VARCHAR}, 
+      #{expertFee,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.ExpertsInfo" >
+    insert into experts_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        serial_id,
+      </if>
+      <if test="firstType != null" >
+        first_type,
+      </if>
+      <if test="secondType != null" >
+        second_type,
+      </if>
+      <if test="thirdType != null" >
+        third_type,
+      </if>
+      <if test="expertName != null" >
+        expert_name,
+      </if>
+      <if test="expertNatural != null" >
+        expert_natural,
+      </if>
+      <if test="expertFee != null" >
+        expert_fee,
+      </if>
+      <if test="phoneNo != null" >
+        phone_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        #{serialId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstType != null" >
+        #{firstType,jdbcType=VARCHAR},
+      </if>
+      <if test="secondType != null" >
+        #{secondType,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdType != null" >
+        #{thirdType,jdbcType=VARCHAR},
+      </if>
+      <if test="expertName != null" >
+        #{expertName,jdbcType=VARCHAR},
+      </if>
+      <if test="expertNatural != null" >
+        #{expertNatural,jdbcType=VARCHAR},
+      </if>
+      <if test="expertFee != null" >
+        #{expertFee,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.natabm.entity.ExpertsInfo" >
+    update experts_info
+    <set >
+      <if test="firstType != null" >
+        first_type = #{firstType,jdbcType=VARCHAR},
+      </if>
+      <if test="secondType != null" >
+        second_type = #{secondType,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdType != null" >
+        third_type = #{thirdType,jdbcType=VARCHAR},
+      </if>
+      <if test="expertName != null" >
+        expert_name = #{expertName,jdbcType=VARCHAR},
+      </if>
+      <if test="expertNatural != null" >
+        expert_natural = #{expertNatural,jdbcType=VARCHAR},
+      </if>
+      <if test="expertFee != null" >
+        expert_fee = #{expertFee,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.natabm.entity.ExpertsInfo" >
+    update experts_info
+    set first_type = #{firstType,jdbcType=VARCHAR},
+      second_type = #{secondType,jdbcType=VARCHAR},
+      third_type = #{thirdType,jdbcType=VARCHAR},
+      expert_name = #{expertName,jdbcType=VARCHAR},
+      expert_natural = #{expertNatural,jdbcType=VARCHAR},
+      expert_fee = #{expertFee,jdbcType=VARCHAR},
+      phone_no = #{phoneNo,jdbcType=VARCHAR}
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+</mapper>

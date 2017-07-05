@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.CalendarInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.CalendarInfo" >
+    <id column="serial_id" property="serialId" jdbcType="VARCHAR" />
+    <result column="exp_serial_id" property="expSerialId" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="oper_time" property="operTime" jdbcType="DATE" />
+    <result column="oper_flag" property="operFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serial_id, exp_serial_id, start_time, end_time, oper_time, oper_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from calendar_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from calendar_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.natabm.entity.CalendarInfo" >
+    insert into calendar_info (serial_id, exp_serial_id, start_time, 
+      end_time, oper_time, oper_flag
+      )
+    values (#{serialId,jdbcType=VARCHAR}, #{expSerialId,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, 
+      #{endTime,jdbcType=DATE}, #{operTime,jdbcType=DATE}, #{operFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.CalendarInfo" >
+    insert into calendar_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        serial_id,
+      </if>
+      <if test="expSerialId != null" >
+        exp_serial_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="operTime != null" >
+        oper_time,
+      </if>
+      <if test="operFlag != null" >
+        oper_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        #{serialId,jdbcType=VARCHAR},
+      </if>
+      <if test="expSerialId != null" >
+        #{expSerialId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="operTime != null" >
+        #{operTime,jdbcType=DATE},
+      </if>
+      <if test="operFlag != null" >
+        #{operFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.natabm.entity.CalendarInfo" >
+    update calendar_info
+    <set >
+      <if test="expSerialId != null" >
+        exp_serial_id = #{expSerialId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="operTime != null" >
+        oper_time = #{operTime,jdbcType=DATE},
+      </if>
+      <if test="operFlag != null" >
+        oper_flag = #{operFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.natabm.entity.CalendarInfo" >
+    update calendar_info
+    set exp_serial_id = #{expSerialId,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      oper_time = #{operTime,jdbcType=DATE},
+      oper_flag = #{operFlag,jdbcType=VARCHAR}
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+</mapper>

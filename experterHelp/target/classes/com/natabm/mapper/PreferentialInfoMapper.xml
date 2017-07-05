@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.PreferentialInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.PreferentialInfo" >
+    <id column="serial_id" property="serialId" jdbcType="VARCHAR" />
+    <result column="member_type" property="memberType" jdbcType="VARCHAR" />
+    <result column="stand_dis" property="standDis" jdbcType="VARCHAR" />
+    <result column="expert_dis" property="expertDis" jdbcType="VARCHAR" />
+    <result column="product_dis" property="productDis" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serial_id, member_type, stand_dis, expert_dis, product_dis
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from preferential_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from preferential_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.natabm.entity.PreferentialInfo" >
+    insert into preferential_info (serial_id, member_type, stand_dis, 
+      expert_dis, product_dis)
+    values (#{serialId,jdbcType=VARCHAR}, #{memberType,jdbcType=VARCHAR}, #{standDis,jdbcType=VARCHAR}, 
+      #{expertDis,jdbcType=VARCHAR}, #{productDis,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.PreferentialInfo" >
+    insert into preferential_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        serial_id,
+      </if>
+      <if test="memberType != null" >
+        member_type,
+      </if>
+      <if test="standDis != null" >
+        stand_dis,
+      </if>
+      <if test="expertDis != null" >
+        expert_dis,
+      </if>
+      <if test="productDis != null" >
+        product_dis,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        #{serialId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberType != null" >
+        #{memberType,jdbcType=VARCHAR},
+      </if>
+      <if test="standDis != null" >
+        #{standDis,jdbcType=VARCHAR},
+      </if>
+      <if test="expertDis != null" >
+        #{expertDis,jdbcType=VARCHAR},
+      </if>
+      <if test="productDis != null" >
+        #{productDis,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.natabm.entity.PreferentialInfo" >
+    update preferential_info
+    <set >
+      <if test="memberType != null" >
+        member_type = #{memberType,jdbcType=VARCHAR},
+      </if>
+      <if test="standDis != null" >
+        stand_dis = #{standDis,jdbcType=VARCHAR},
+      </if>
+      <if test="expertDis != null" >
+        expert_dis = #{expertDis,jdbcType=VARCHAR},
+      </if>
+      <if test="productDis != null" >
+        product_dis = #{productDis,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.natabm.entity.PreferentialInfo" >
+    update preferential_info
+    set member_type = #{memberType,jdbcType=VARCHAR},
+      stand_dis = #{standDis,jdbcType=VARCHAR},
+      expert_dis = #{expertDis,jdbcType=VARCHAR},
+      product_dis = #{productDis,jdbcType=VARCHAR}
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+</mapper>

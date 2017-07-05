@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.TestMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.Test" >
+    <result column="test1" property="test1" jdbcType="VARCHAR" />
+    <result column="test2" property="test2" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.natabm.entity.Test" >
+    insert into test (test1, test2)
+    values (#{test1,jdbcType=VARCHAR}, #{test2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.Test" >
+    insert into test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="test1 != null" >
+        test1,
+      </if>
+      <if test="test2 != null" >
+        test2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="test1 != null" >
+        #{test1,jdbcType=VARCHAR},
+      </if>
+      <if test="test2 != null" >
+        #{test2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.OrderInfo" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="oper_time" property="operTime" jdbcType="DATE" />
+    <result column="order_fee" property="orderFee" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, user_id, order_type, oper_time, order_fee
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.natabm.entity.OrderInfo" >
+    insert into order_info (order_id, user_id, order_type, 
+      oper_time, order_fee)
+    values (#{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, 
+      #{operTime,jdbcType=DATE}, #{orderFee,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="operTime != null" >
+        oper_time,
+      </if>
+      <if test="orderFee != null" >
+        order_fee,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        #{operTime,jdbcType=DATE},
+      </if>
+      <if test="orderFee != null" >
+        #{orderFee,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.natabm.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        oper_time = #{operTime,jdbcType=DATE},
+      </if>
+      <if test="orderFee != null" >
+        order_fee = #{orderFee,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.natabm.entity.OrderInfo" >
+    update order_info
+    set user_id = #{userId,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      oper_time = #{operTime,jdbcType=DATE},
+      order_fee = #{orderFee,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

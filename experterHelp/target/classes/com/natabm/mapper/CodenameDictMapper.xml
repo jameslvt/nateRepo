@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.CodenameDictMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.CodenameDict" >
+    <result column="FIELD_EN_NAME" property="fieldEnName" jdbcType="VARCHAR" />
+    <result column="FIELD_CN_NAME" property="fieldCnName" jdbcType="VARCHAR" />
+    <result column="FIELD_VALUE" property="fieldValue" jdbcType="VARCHAR" />
+    <result column="FIELD_DESC" property="fieldDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.natabm.entity.CodenameDict" >
+    insert into codename_dict (FIELD_EN_NAME, FIELD_CN_NAME, FIELD_VALUE, 
+      FIELD_DESC)
+    values (#{fieldEnName,jdbcType=VARCHAR}, #{fieldCnName,jdbcType=VARCHAR}, #{fieldValue,jdbcType=VARCHAR}, 
+      #{fieldDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.CodenameDict" >
+    insert into codename_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fieldEnName != null" >
+        FIELD_EN_NAME,
+      </if>
+      <if test="fieldCnName != null" >
+        FIELD_CN_NAME,
+      </if>
+      <if test="fieldValue != null" >
+        FIELD_VALUE,
+      </if>
+      <if test="fieldDesc != null" >
+        FIELD_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fieldEnName != null" >
+        #{fieldEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldCnName != null" >
+        #{fieldCnName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null" >
+        #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDesc != null" >
+        #{fieldDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

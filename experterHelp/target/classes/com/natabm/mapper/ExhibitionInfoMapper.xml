@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.ExhibitionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.ExhibitionInfo" >
+    <id column="serial_id" property="serialId" jdbcType="VARCHAR" />
+    <result column="exhibition_address" property="exhibitionAddress" jdbcType="VARCHAR" />
+    <result column="exhibition_protity" property="exhibitionProtity" jdbcType="VARCHAR" />
+    <result column="exhibition_price" property="exhibitionPrice" jdbcType="VARCHAR" />
+    <result column="exhibition_type" property="exhibitionType" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serial_id, exhibition_address, exhibition_protity, exhibition_price, exhibition_type, 
+    start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from exhibition_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from exhibition_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.natabm.entity.ExhibitionInfo" >
+    insert into exhibition_info (serial_id, exhibition_address, exhibition_protity, 
+      exhibition_price, exhibition_type, start_time, 
+      end_time)
+    values (#{serialId,jdbcType=VARCHAR}, #{exhibitionAddress,jdbcType=VARCHAR}, #{exhibitionProtity,jdbcType=VARCHAR}, 
+      #{exhibitionPrice,jdbcType=VARCHAR}, #{exhibitionType,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, 
+      #{endTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.ExhibitionInfo" >
+    insert into exhibition_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        serial_id,
+      </if>
+      <if test="exhibitionAddress != null" >
+        exhibition_address,
+      </if>
+      <if test="exhibitionProtity != null" >
+        exhibition_protity,
+      </if>
+      <if test="exhibitionPrice != null" >
+        exhibition_price,
+      </if>
+      <if test="exhibitionType != null" >
+        exhibition_type,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        #{serialId,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionAddress != null" >
+        #{exhibitionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionProtity != null" >
+        #{exhibitionProtity,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionPrice != null" >
+        #{exhibitionPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionType != null" >
+        #{exhibitionType,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.natabm.entity.ExhibitionInfo" >
+    update exhibition_info
+    <set >
+      <if test="exhibitionAddress != null" >
+        exhibition_address = #{exhibitionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionProtity != null" >
+        exhibition_protity = #{exhibitionProtity,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionPrice != null" >
+        exhibition_price = #{exhibitionPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="exhibitionType != null" >
+        exhibition_type = #{exhibitionType,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+    </set>
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.natabm.entity.ExhibitionInfo" >
+    update exhibition_info
+    set exhibition_address = #{exhibitionAddress,jdbcType=VARCHAR},
+      exhibition_protity = #{exhibitionProtity,jdbcType=VARCHAR},
+      exhibition_price = #{exhibitionPrice,jdbcType=VARCHAR},
+      exhibition_type = #{exhibitionType,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE}
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+</mapper>

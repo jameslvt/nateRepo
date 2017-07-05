@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="/experterHelp/nresource/css/bootstrap.min.css" rel="stylesheet">
+<link href="/experterHelp/nresource/css/datepicker3.css" rel="stylesheet">
+<link href="/experterHelp/nresource/css/styles.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/experterHelp/nresource/css/xcConfirm.css" />
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<div>
+		<div style="width: 890px; height: 70px; margin-left: 530px;" >
+		</div>
+			<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">用户注册</div>
+				<div class="panel-body">
+					<form role="form">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="用户名" name="userId" id="userId">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="密码" id="password" name="password" type="password" value="">
+							</div>
+							<div id="com">
+								<a v-on:click="register" id="register" class="btn btn-primary" >确定</a>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div><!-- /.col-->
+	</div><!-- /.row -->	
+			
+		
+	</div>
+	
+	
+		
+
+	<script src="/experterHelp/nresource/js/jquery-1.11.1.min.js"></script>
+	<script src="/experterHelp/nresource/js/util.js"></script>
+	<script src="/experterHelp/nresource/js/bootstrap.min.js"></script>
+	<script src="/experterHelp/nresource/js/bootstrap-datepicker.js"></script>
+	<script src="/experterHelp/nresource/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$("#register").click(register);
+		function register(){
+			var username=$.trim($("#userId").val());
+		    var passwd = $.trim($("#password").val());
+		    if(username =='' || passwd ==''){
+		     window.wxc.xcConfirm("用户名或密码为空，请检查！", window.wxc.xcConfirm.typeEnum.warning);
+		     return;
+		    }
+			$.ajax({
+		        type: "post",
+		        url: getWebRoot()+"/user/regist.do",
+		        dataType: "json",
+		         data:{
+			    	 username:username,
+			    	 passwd:passwd
+					},
+		        success: function(data){
+		        console.log(JSON.stringify(data));
+		         	if(data.result==true){
+		            	 window.wxc.xcConfirm("注册成功！", window.wxc.xcConfirm.typeEnum.success,{
+						        onOk:function(){
+						            window.location.href=getWebRoot()+"/user/toLogin.do";
+						        }
+						    });
+		            	 
+		            	 return;
+		             }else{
+		             	window.wxc.xcConfirm("系统忙，请稍候重试！", window.wxc.xcConfirm.typeEnum.error);
+		             	return;
+		             }
+		        },
+		        error: function(data){
+		        	window.wxc.xcConfirm("系统忙，请稍候重试！", window.wxc.xcConfirm.typeEnum.error);
+		        }
+		    });
+       		}
+	</script>	
+</body>
+</html>

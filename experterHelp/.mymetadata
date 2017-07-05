@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="experterHelp"
+  id="myeclipse.1476451704895"
+  context-root="/experterHelp"
+  j2ee-spec="5.0"
+  archive="experterHelp.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

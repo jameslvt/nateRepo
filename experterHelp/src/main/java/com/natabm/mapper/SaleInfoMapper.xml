@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.natabm.dao.SaleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.natabm.entity.SaleInfo" >
+    <id column="serial_id" property="serialId" jdbcType="VARCHAR" />
+    <result column="sale_type" property="saleType" jdbcType="VARCHAR" />
+    <result column="sale_price" property="salePrice" jdbcType="VARCHAR" />
+    <result column="sale_units" property="saleUnits" jdbcType="VARCHAR" />
+    <result column="sale_num" property="saleNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serial_id, sale_type, sale_price, sale_units, sale_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sale_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sale_info
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.natabm.entity.SaleInfo" >
+    insert into sale_info (serial_id, sale_type, sale_price, 
+      sale_units, sale_num)
+    values (#{serialId,jdbcType=VARCHAR}, #{saleType,jdbcType=VARCHAR}, #{salePrice,jdbcType=VARCHAR}, 
+      #{saleUnits,jdbcType=VARCHAR}, #{saleNum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.natabm.entity.SaleInfo" >
+    insert into sale_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        serial_id,
+      </if>
+      <if test="saleType != null" >
+        sale_type,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="saleUnits != null" >
+        sale_units,
+      </if>
+      <if test="saleNum != null" >
+        sale_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        #{serialId,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null" >
+        #{saleType,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleUnits != null" >
+        #{saleUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="saleNum != null" >
+        #{saleNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.natabm.entity.SaleInfo" >
+    update sale_info
+    <set >
+      <if test="saleType != null" >
+        sale_type = #{saleType,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleUnits != null" >
+        sale_units = #{saleUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="saleNum != null" >
+        sale_num = #{saleNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.natabm.entity.SaleInfo" >
+    update sale_info
+    set sale_type = #{saleType,jdbcType=VARCHAR},
+      sale_price = #{salePrice,jdbcType=VARCHAR},
+      sale_units = #{saleUnits,jdbcType=VARCHAR},
+      sale_num = #{saleNum,jdbcType=VARCHAR}
+    where serial_id = #{serialId,jdbcType=VARCHAR}
+  </update>
+</mapper>
